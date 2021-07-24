@@ -169,6 +169,7 @@ text-align: center;
     margin: 1em auto;
     width: 50%;
     padding: 2em;
+    transition: all 0.5s ease;
 }
 
 .sobre h2 {
@@ -225,11 +226,32 @@ text-align: center;
     100%{background-position:0% 0%}
 }
 
+.spinner{
+    margin:1em auto;
+    width: 10%;
+    border: 0.3em solid #8a8a8a;
+    border-top-color: #f0141e;
+    border-radius: 50%;
+    animation: loading 1.7s ease infinite;
+    transition: opacity 0.25s ease;
+}
+.spinner::after{
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+}
+
+@keyframes loading {
+    0%{transform:rotate(0deg)}
+    100%{transform: rotate(360deg);}
+}
+
 .oculta{
     height: 0;
     opacity: 0;
     padding: 0;
     margin: 0;
+    border-width: 0;
 }
 
 

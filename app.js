@@ -9,6 +9,7 @@ const sobre = document.getElementById('sobre');
 const personajesBtn = document.getElementById('personajesBtn');
 const comicsBtn = document.getElementById('comicsBtn');
 const sobreBtn = document.getElementById('sobreBtn');
+const spinner = document.querySelector('.spinner');
 
 let listaHtml = '';
 let limit = 24;
@@ -17,6 +18,7 @@ let query = '';
 let tipo = 'characters';
 
 personajesBtn.classList.add('activo');
+spinner.classList.add('oculta');
 
 const sinImagen = '_not_';
 const noImg = '4c002e0305708';
@@ -99,12 +101,16 @@ sobreBtn.addEventListener('click', ()=>{
      
 
 const marvel = (tipo, query) => {
+
+    spinner.classList.remove('oculta');
+
     const urlAPI = `http://gateway.marvel.com/v1/public/${tipo}?${query}limit=${limit}&offset=${offset}&ts=1&apikey=${API.API_KEY}&hash=${API.HASH}`;
 
     fetch(urlAPI)
         .then(res => res.json())
         .then(({ data }) => {
             console.log(data)
+            spinner.classList.add('oculta');
 
             if(data.total == 0) {
                 listaHtml = `<div class="noExiste" id="noExiste">
