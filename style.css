@@ -75,14 +75,19 @@ img{
     object-fit: cover;
 }
 
+.inp{
+    transition: all 0.3s ease;
+    height: auto;
+}
+
 input[type=text]{
-    margin:0.75em 0;
     font-size: 1rem;
     padding: .5em;
     color: white;
     background-color: #1D3557;
     border: 1px solid cadetblue;
     border-radius: 0.3em;
+    display: block;
     
   }
   input[type=text]:focus{
@@ -97,12 +102,12 @@ input[type=text]{
   }
 
   .oculta{
-      transition: all 1s ease;
-      display: none;
+      height: 0;
+      opacity: 0;
   }
 
-  button {
-      border: none;
+  .btnTit {
+    border: none;
     font-family: inherit;
     font-size: 1.5em;
     line-height: inherit;
@@ -115,11 +120,36 @@ input[type=text]{
     transition: color .15s ease-in-out,
     background-color .15s ease-in-out;
     margin: 0.5em;
+    
 }
 
-button:hover {
+.btnTit:hover {
     color: white;
     /* background-color: cadetblue; */
+}
+
+nav{
+    margin-top: .5em;
+    display: flex;
+    justify-content: space-around;
+    transition: all 0.3s ease;
+    
+}
+
+.btnNav{
+    width: 33%;
+    padding: 0.5em;
+    border: none;
+    font-family: inherit;
+    font-size: 1.2em;
+    line-height: inherit;
+    background: none;
+    cursor: pointer;
+    color: #1D3557;
+    background-color:cadetblue;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    z-index: 10;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -168,6 +198,10 @@ button:hover {
 
     input[type="text"]{
         margin-left: 0.5em;
+    }
+
+    .btnNav{
+        padding: 0.3em;
     }
 
   }
