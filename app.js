@@ -1,15 +1,30 @@
 import {API} from './env.js';
-let listaHtml = '';
-let limit = 24;
-let offset = 0;
+
 let contenedor = document.querySelector('#row');
 const input = document.querySelector('input');
 const inp = document.getElementById('inp');
 const nav = document.getElementById('nav');
+const marv = document.getElementById('marv');
+
+let listaHtml = '';
+let limit = 24;
+let offset = 0;
 let query = '';
+let tipo = 'characters';
+
 const sinImagen = '_not_';
 const noImg = '4c002e0305708';
+
 let contSinImg = 0;
+
+const reset = ()=>{
+    listaHtml = '';
+    offset=0;
+    contSinImg = 0;
+    query = '';
+    input.value = '';
+    inp.classList.add('oculta');
+}
 
 function ocultar(el){
     el.classList.toggle('oculta');
@@ -18,20 +33,44 @@ function ocultar(el){
 const updateValue = (e) => {
     const busqueda = e.target.value;
     console.log(e.target.value);
-    listaHtml = '';
-    offset=0;
-    contSinImg = 0;
-    query= (busqueda) ?  `nameStartsWith=${busqueda}&` : '';
-    marvel();
+    input.value = e.target.value;
+    reset();
+    if(tipo=='characters'){
+        query= (busqueda) ?  `nameStartsWith=${busqueda}&` : '';  
+    } 
+    else{
+        query= (busqueda) ?  `titleStartsWith=${busqueda}&` : '';  
+    }
+    marvel(tipo, query);
 }
 
 input.addEventListener('change', updateValue);
+
+marv.addEventListener('click', ()=>{
+    reset();
+    tipo = 'characters';
+    marvel(tipo, query);
+})
+
+
+//Botones
 const buscarBtn = document.getElementById('buscarBtn').addEventListener('click', ()=>ocultar(inp));
 const menuBtn = document.getElementById('menuBtn').addEventListener('click', ()=>ocultar(nav));
+const personajesBtn = document.getElementById('personajesBtn').addEventListener('click',()=>{
+    reset();
+    tipo = 'characters';
+    marvel(tipo, query);
+})
+
+const comicsBtn = document.getElementById('comicsBtn').addEventListener('click',()=>{
+    reset();
+    tipo = 'comics';
+    marvel(tipo, query);
+})
      
 
-const marvel = () => {
-    const urlAPI = `http://gateway.marvel.com/v1/public/characters?${query}limit=${limit}&offset=${offset}&ts=1&apikey=${API.API_KEY}&hash=${API.HASH}`;
+const marvel = (tipo, query) => {
+    const urlAPI = `http://gateway.marvel.com/v1/public/${tipo}?${query}limit=${limit}&offset=${offset}&ts=1&apikey=${API.API_KEY}&hash=${API.HASH}`;
 
     fetch(urlAPI)
         .then(res => res.json())
@@ -68,7 +107,7 @@ const detectaUltimoEnPantalla = (entries)=>{
             console.log(entry)
             offset = offset + 24;
             console.log('offset' + offset)
-            marvel();
+            marvel(tipo, query);
         }})
 }
 
@@ -82,4 +121,4 @@ const setObserver = ()=>{
     observer.observe(contenedor.lastElementChild);
 }
 
-marvel();
+marvel(tipo, query);
