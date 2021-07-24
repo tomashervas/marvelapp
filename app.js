@@ -76,19 +76,28 @@ const marvel = (tipo, query) => {
         .then(res => res.json())
         .then(({ data }) => {
             console.log(data)
-            data.results.map(hero => {
-                if (hero.thumbnail.path.includes(sinImagen) || hero.thumbnail.path.includes(noImg)) return contSinImg++;
 
-                listaHtml += `<div class="cajaImagen">
-                                <a href="${hero.urls[0].url}">
-                                    <img src="${hero.thumbnail.path}.${hero.thumbnail.extension}" alt="${hero.name}">
-
-                                    <div class="cajaNombre">
-                                        <p class="nombreHeroe">${hero.name || hero.title}</p>
-                                    </div>
-                                </a>
+            if(data.total == 0) {
+                listaHtml = `<div class="noExiste" id="noExiste">
+                                <p>No se ha encontrado nada, prueba otra cosa...</p>
                             </div>`
+            }
+            data.results.map(hero => {
+
+                if (hero.thumbnail.path.includes(sinImagen) || hero.thumbnail.path.includes(noImg)) return contSinImg++;
+                
+                    listaHtml += `<div class="cajaImagen">
+                                    <a href="${hero.urls[0].url}">
+                                        <img src="${hero.thumbnail.path}.${hero.thumbnail.extension}" alt="${hero.name || hero.title}">
+    
+                                        <div class="cajaNombre">
+                                            <p class="nombreHeroe">${hero.name || hero.title}</p>
+                                        </div>
+                                    </a>
+                                </div>`
+
             })
+            
             contenedor.innerHTML = listaHtml;
             //console.log(contenedor.lastElementChild);
             console.log('total ' + data.total)
