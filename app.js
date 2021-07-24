@@ -5,12 +5,18 @@ const input = document.querySelector('input');
 const inp = document.getElementById('inp');
 const nav = document.getElementById('nav');
 const marv = document.getElementById('marv');
+const sobre = document.getElementById('sobre');
+const personajesBtn = document.getElementById('personajesBtn');
+const comicsBtn = document.getElementById('comicsBtn');
+const sobreBtn = document.getElementById('sobreBtn');
 
 let listaHtml = '';
 let limit = 24;
 let offset = 0;
 let query = '';
 let tipo = 'characters';
+
+personajesBtn.classList.add('activo');
 
 const sinImagen = '_not_';
 const noImg = '4c002e0305708';
@@ -26,7 +32,7 @@ const reset = ()=>{
     inp.classList.add('oculta');
 }
 
-function ocultar(el){
+function toogle(el){
     el.classList.toggle('oculta');
 }
 
@@ -48,24 +54,47 @@ input.addEventListener('change', updateValue);
 
 marv.addEventListener('click', ()=>{
     reset();
+    sobreBtn.classList.remove('activo');
+    comicsBtn.classList.remove('activo');
+    personajesBtn.classList.add('activo');
+    sobre.classList.add('oculta');
     tipo = 'characters';
     marvel(tipo, query);
 })
 
 
 //Botones
-const buscarBtn = document.getElementById('buscarBtn').addEventListener('click', ()=>ocultar(inp));
-const menuBtn = document.getElementById('menuBtn').addEventListener('click', ()=>ocultar(nav));
-const personajesBtn = document.getElementById('personajesBtn').addEventListener('click',()=>{
+const buscarBtn = document.getElementById('buscarBtn').addEventListener('click', ()=>toogle(inp));
+const menuBtn = document.getElementById('menuBtn').addEventListener('click', ()=>{toogle(nav)});
+personajesBtn.addEventListener('click',()=>{
     reset();
+    sobreBtn.classList.remove('activo');
+    comicsBtn.classList.remove('activo');
+    personajesBtn.classList.add('activo');
+    sobre.classList.add('oculta');
     tipo = 'characters';
     marvel(tipo, query);
 })
 
-const comicsBtn = document.getElementById('comicsBtn').addEventListener('click',()=>{
+comicsBtn.addEventListener('click',()=>{
     reset();
+    sobreBtn.classList.remove('activo');
+    comicsBtn.classList.add('activo');
+    personajesBtn.classList.remove('activo');
+    sobre.classList.add('oculta');
     tipo = 'comics';
     marvel(tipo, query);
+})
+
+sobreBtn.addEventListener('click', ()=>{
+    reset();
+    sobre.classList.remove('oculta');
+    sobreBtn.classList.add('activo');
+    comicsBtn.classList.remove('activo');
+    personajesBtn.classList.remove('activo');
+    while (contenedor.firstChild) {
+        contenedor.removeChild(contenedor.firstChild);
+      }
 })
      
 
@@ -95,9 +124,8 @@ const marvel = (tipo, query) => {
                                         </div>
                                     </a>
                                 </div>`
-
             })
-            
+
             contenedor.innerHTML = listaHtml;
             //console.log(contenedor.lastElementChild);
             console.log('total ' + data.total)
@@ -107,8 +135,16 @@ const marvel = (tipo, query) => {
             if(data.total > (contenedor.childElementCount + contSinImg)){
                 setObserver();
             }
+
+        }).catch(err=>{
+            console.log(err);
+            listaHtml = `<div class="noExiste" id="noExiste">
+                                <p>Ha ocurrido un error, intentelo más tarde...</p>
+                            </div>`
         })
 }
+
+//Intersection observer para detectar último héroe en pantalla y hacer infinit scroll
 
 const detectaUltimoEnPantalla = (entries)=>{
     entries.forEach(entry=>{

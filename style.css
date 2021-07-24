@@ -102,10 +102,7 @@ input[type=text]{
       color: beige;
   }
 
-  .oculta{
-      height: 0;
-      opacity: 0;
-  }
+  
 
   .btnTit {
     border: none;
@@ -154,6 +151,10 @@ nav{
     z-index: 10;
 }
 
+.activo{
+    color: #f0141e;
+}
+
 .noExiste{
 text-align: center;
 }
@@ -163,6 +164,74 @@ text-align: center;
     color: white;
     font-size: 1.5em;
 }
+.sobre{
+    background-color: black;
+    margin: 1em auto;
+    width: 50%;
+    padding: 2em;
+}
+
+.sobre h2 {
+    font-size: 3em;
+    margin: 0;
+}
+.sobre h3 {
+    font-size: 2em;
+}
+.sobre h3, p, li, h2 {
+    color: white;
+    text-align: center;
+
+}
+.sobre li, p{
+    list-style: none;
+}
+
+.sobre ul{
+    padding-left: 0;
+}
+
+.tecnologias{
+    padding: 1em;
+    margin-top: 0.5em;
+}
+
+.tecnologias p {
+    color: #f0141e;
+    margin-bottom: 0.5em;
+}
+
+.tecnologias ul {
+
+    margin-top: 0.5em;
+}
+
+.desarrolla{
+    margin: .5em;
+    margin-top: 1em;
+    border: white solid 1px;
+    background: linear-gradient(321deg, #000000, #8a8a8a, #000000);
+    background-size: 600% 600%;
+    animation: gradiente 10s ease infinite;
+}
+
+.desarrolla h3 {
+    margin: 0.5em;
+}
+
+@keyframes gradiente {
+    0%{background-position:0% 0%}
+    50%{background-position:100% 100%}
+    100%{background-position:0% 0%}
+}
+
+.oculta{
+    height: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+}
+
 
 @media only screen and (max-width: 1200px) {
     .container {
@@ -215,6 +284,20 @@ text-align: center;
     .btnNav{
         padding: 0.3em;
     }
+
+    .sobre {
+        width: 90%;
+    }
+
+    .sobre h2 {
+        font-size: 2em;
+        margin: 0;
+    }
+    .sobre h3 {
+        font-size: 1.25em;
+    }
+
+    
 
   }
 
