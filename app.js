@@ -122,7 +122,7 @@ const marvel = (tipo, query) => {
 
     spinner.classList.remove('oculta');
 
-    const urlAPI = `http://gateway.marvel.com/v1/public/${tipo}?${query}limit=${limit}&offset=${offset}&ts=1&apikey=${API.API_KEY}&hash=${API.HASH}`;
+    const urlAPI = `https://gateway.marvel.com/v1/public/${tipo}?${query}limit=${limit}&offset=${offset}&ts=1&apikey=${API.API_KEY}&hash=${API.HASH}`;
 
     fetch(urlAPI)
         .then(res => res.json())
