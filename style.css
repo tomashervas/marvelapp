@@ -151,6 +151,10 @@ nav{
     z-index: 10;
 }
 
+.disabled{
+    opacity: 0.2;
+}
+
 .activo{
     color: #f0141e;
 }

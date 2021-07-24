@@ -10,6 +10,9 @@ const personajesBtn = document.getElementById('personajesBtn');
 const comicsBtn = document.getElementById('comicsBtn');
 const sobreBtn = document.getElementById('sobreBtn');
 const spinner = document.querySelector('.spinner');
+const buscarBtn = document.getElementById('buscarBtn');
+const menuBtn = document.getElementById('menuBtn');
+
 
 let listaHtml = '';
 let limit = 24;
@@ -26,12 +29,20 @@ const noImg = '4c002e0305708';
 let contSinImg = 0;
 
 const reset = ()=>{
+    buscarBtn.classList.remove('disabled');
+    buscarBtn.disabled=false;
     listaHtml = '';
     offset=0;
     contSinImg = 0;
     query = '';
     input.value = '';
     inp.classList.add('oculta');
+}
+
+const vaciarLista = ()=>{
+    while (contenedor.firstChild) {
+        contenedor.removeChild(contenedor.firstChild);
+      }
 }
 
 function toogle(el){
@@ -55,6 +66,7 @@ const updateValue = (e) => {
 input.addEventListener('change', updateValue);
 
 marv.addEventListener('click', ()=>{
+    vaciarLista();
     reset();
     sobreBtn.classList.remove('activo');
     comicsBtn.classList.remove('activo');
@@ -66,9 +78,14 @@ marv.addEventListener('click', ()=>{
 
 
 //Botones
-const buscarBtn = document.getElementById('buscarBtn').addEventListener('click', ()=>toogle(inp));
-const menuBtn = document.getElementById('menuBtn').addEventListener('click', ()=>{toogle(nav)});
+buscarBtn.addEventListener('click', ()=>{
+    toogle(inp)
+    input.focus();
+});
+
+menuBtn.addEventListener('click', ()=>{toogle(nav)});
 personajesBtn.addEventListener('click',()=>{
+    vaciarLista();
     reset();
     sobreBtn.classList.remove('activo');
     comicsBtn.classList.remove('activo');
@@ -79,6 +96,7 @@ personajesBtn.addEventListener('click',()=>{
 })
 
 comicsBtn.addEventListener('click',()=>{
+    vaciarLista();
     reset();
     sobreBtn.classList.remove('activo');
     comicsBtn.classList.add('activo');
@@ -90,13 +108,13 @@ comicsBtn.addEventListener('click',()=>{
 
 sobreBtn.addEventListener('click', ()=>{
     reset();
+    buscarBtn.disabled = true;
+    buscarBtn.classList.add('disabled');
     sobre.classList.remove('oculta');
     sobreBtn.classList.add('activo');
     comicsBtn.classList.remove('activo');
     personajesBtn.classList.remove('activo');
-    while (contenedor.firstChild) {
-        contenedor.removeChild(contenedor.firstChild);
-      }
+    vaciarLista()
 })
      
 
