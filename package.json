@@ -1,0 +1,14 @@
+{
+  "name": "marvelapp",
+  "version": "1.0.0",
+  "description": "Marvel app en JS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose Tomás Hervás",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  }
+}

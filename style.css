@@ -56,6 +56,7 @@ svg {
     align-items: center;
     justify-content: center;
     opacity: 0;
+    transition: .33s ease;
     
 }
 .cajaNombre:hover{
@@ -115,3 +116,38 @@ img{
     }
   }
 
+  @media (orientation:landscape) and (max-width: 900px) {
+
+      .titulo {
+          display: none;
+      }
+    .container {
+      width: 100%;
+    }
+
+    .cajaImagen {
+        width: 33%;
+        height: 50vh;
+    }
+
+    .cajaNombre {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        background-color: rgba(0, 0, 0,0.75);
+        width: auto;
+        /* height: fit-content; */
+        text-align: center;
+        margin: 0.25em;
+        opacity: 1;
+        
+    }
+    
+    .nombreHeroe {
+        color: white;
+        font-size: 1.25em;
+    }
+  }
