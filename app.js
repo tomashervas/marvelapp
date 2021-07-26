@@ -84,6 +84,7 @@ buscarBtn.addEventListener('click', ()=>{
 });
 
 menuBtn.addEventListener('click', ()=>{toogle(nav)});
+
 personajesBtn.addEventListener('click',()=>{
     vaciarLista();
     reset();
@@ -108,27 +109,31 @@ comicsBtn.addEventListener('click',()=>{
 
 sobreBtn.addEventListener('click', ()=>{
     reset();
+    tipo = '';
     buscarBtn.disabled = true;
     buscarBtn.classList.add('disabled');
     sobre.classList.remove('oculta');
     sobreBtn.classList.add('activo');
     comicsBtn.classList.remove('activo');
-    personajesBtn.classList.remove('activo');
+    personajesBtn.classList.remove('activo')
     vaciarLista()
 })
      
 
-const marvel = (tipo, query) => {
+const marvel = (t, q) => {
 
     spinner.classList.remove('oculta');
 
-    const urlAPI = `https://gateway.marvel.com/v1/public/${tipo}?${query}limit=${limit}&offset=${offset}&ts=1&apikey=${API.API_KEY}&hash=${API.HASH}`;
+    const urlAPI = `https://gateway.marvel.com/v1/public/${t}?${q}limit=${limit}&offset=${offset}&ts=1&apikey=${API.API_KEY}&hash=${API.HASH}`;
 
     fetch(urlAPI)
         .then(res => res.json())
         .then(({ data }) => {
-            console.log(data)
+
             spinner.classList.add('oculta');
+
+            if(t != tipo) return;
+            console.log(data)
 
             if(data.total == 0) {
                 listaHtml = `<div class="noExiste" id="noExiste">
